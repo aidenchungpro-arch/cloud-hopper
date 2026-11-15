@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "scores": {
+      ".read": true,
+      ".indexOn": ["score"],
+      "$id": {
+        ".write": "!data.exists() || newData.child('score').val() > data.child('score').val()",
+        ".validate": "newData.hasChildren(['name', 'score'])",
+        "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 12" },
+        "score": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1000000" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}
